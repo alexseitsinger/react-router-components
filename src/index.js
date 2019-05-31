@@ -3,18 +3,22 @@ import React from "react"
 import { connect } from "react-redux"
 
 export function createToggledComponent({
+<<<<<<< Updated upstream
   components: { anonymous, authenticated },
-  reducer: { name = "auth", key = "isAuthenticated" }
+=======
+  components: { Anonymous, Authenticated },
+>>>>>>> Stashed changes
+  reducer: { name, key }
 }){
   function ToggledComponent(props) {
-    if(reducer.key && props[reducer.key] === true){
-      return <authenticated {...props} /> 
+    if(key && key in props && props[key] === true){
+      return <Authenticated {...props} /> 
     }
-    return <anonymous {...props} />
+    return <Anonymous {...props} />
   }
 
   const mapState = (state) => ({
-    [reducer.key]: state[reducer.name][reducer.key]
+    [key]: state[name][key]
   })
 
   const ConnectedToggledComponent = connect(mapState)(ToggledComponent)
