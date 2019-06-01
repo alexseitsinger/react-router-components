@@ -12,12 +12,8 @@ export function createToggledComponent({
     }
     return <Anonymous {...props} />
   }
-
   const mapState = (state) => ({
     [key]: state[name][key]
   })
-
-  const ConnectedToggledComponent = connect(mapState)(ToggledComponent)
-
-  return ConnectedToggledComponent
+  return connect(mapState)(ToggledComponent)
 }
