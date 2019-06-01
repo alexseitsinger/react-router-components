@@ -3,11 +3,7 @@ import React from "react"
 import { connect } from "react-redux"
 
 export function createToggledComponent({
-<<<<<<< Updated upstream
-  components: { anonymous, authenticated },
-=======
   components: { Anonymous, Authenticated },
->>>>>>> Stashed changes
   reducer: { name, key }
 }){
   function ToggledComponent(props) {
