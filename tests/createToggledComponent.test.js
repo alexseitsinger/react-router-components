@@ -1,5 +1,5 @@
 import React from "react"
-import { Provider } from "react-redux"
+import { Provider, connect } from "react-redux"
 import { createStore, combineReducers } from "redux"
 
 import { createToggledComponent } from "../src"
@@ -54,11 +54,12 @@ describe("createToggledComponent", () => {
   it("renders anonymous component when state matches", () => {
     store.dispatch(setIsAuthenticated(false))
     const ToggledComponent = createToggledComponent({
+      connect,
       reducer: { name: "auth", key: "isAuthenticated" },
       components: {
         Authenticated: AuthenticatedComponent,
         Anonymous: AnonymousComponent,
-      }
+      }, 
     })
     const wrapper = mountWithProvider(ToggledComponent)
     expect(wrapper.html()).toBe("<div>Anonymous</div>")
@@ -66,6 +67,7 @@ describe("createToggledComponent", () => {
   it("renders authenticated component when state matches", () => {
     store.dispatch(setIsAuthenticated(true))
     const ToggledComponent = createToggledComponent({
+      connect,
       reducer: { name: "auth", key: "isAuthenticated" },
       components: { 
         Authenticated: AuthenticatedComponent, 
@@ -77,6 +79,7 @@ describe("createToggledComponent", () => {
   })
   it("renders anonymous component when state doesnt match", () => {
     const ToggledComponent = createToggledComponent({
+      connect,
       reducer: { name: "auth", key: "UnmatchedKey" },
       components: { 
         Authenticated: AuthenticatedComponent, 
