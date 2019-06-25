@@ -1,3 +1,10 @@
+<a name="v1.0.0"></a>
+## [v1.0.0](https://github.com/alexseitsinger/react-toggled-component/compare/v0.1.0...v1.0.0) (2019-06-25)
+
+### Code Refactoring
+- Changes reducer obj to state str. ([24f58a7](https://github.com/alexseitsinger/react-toggled-component/commit/24f58a77030a2f3b6f9988319c482be9441a58c2))
+
+
 <a name="v0.1.0"></a>
 ## [v0.1.0](https://github.com/alexseitsinger/react-toggled-component/compare/fdf10e09c88d07d78d48ad8edc78e5f9a2b8c4c8...v0.1.0) (2019-06-02)
 
