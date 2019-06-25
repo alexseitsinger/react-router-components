@@ -1,6 +1,6 @@
 {
   "name": "@alexseitsinger/react-toggled-component",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Returns a connected component that renders another component based on the state",
   "main": "dist/main.js",
   "homepage": "https://www.alexseitsinger.com/packages/node/react-toggled-component",
