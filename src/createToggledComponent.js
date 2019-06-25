@@ -5,14 +5,18 @@ import React from "react"
  * Returns a connected component that renders another component based on the
  * state.
  *
- * @param {Object} components
- * The Anonymous and Authenticated components to use for rendering.
- * @param {Object} state
+ * @param {object} config
+ * @param {object} config.components
+ * @param {function} config.components.Authenticated
+ * The component to render when the state is truthy.
+ * @param {function} config.components.Anonymous
+ * The component to render when the state is not truthy.
+ * @param {string} config.state
  * The path to the reducer state key we want to check for truthiness.
- * @param {Function} connect
+ * @param {function} config.connect
  * The connect function to use for connecting to redux.
  *
- * @return {Function}
+ * @return {function}
  * A connected component that has some state mapped for toggling.
  *
  * @example
