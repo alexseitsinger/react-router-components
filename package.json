@@ -9,13 +9,6 @@
     "email": "software@alexseitsinger.com",
     "url": "https://www.alexseitsinger.com"
   },
-  "contributors": [
-    {
-      "name": "Alex Seitsinger",
-      "email": "software@alexseitsinger.com",
-      "url": "https://www.alexseitsinger.com"
-    }
-  ],
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
