@@ -8,18 +8,18 @@
 
 ## createToggledComponent
 
-Returns a connected component that renders another component based on the state.
+Returns a connected component that renders another component based on the
+state.
 
 ### Parameters
 
 -   `$0` **[Object][4]** 
     -   `$0.components.Anonymous`  
     -   `$0.components.Authenticated`  
-    -   `$0.reducer.name`  
-    -   `$0.reducer.key`  
+    -   `$0.state`  
     -   `$0.connect`  
 -   `components` **[Object][4]** The Anonymous and Authenticated components to use for rendering.
--   `reducer` **[Object][4]** The reducer state name and state key to use for toggling.
+-   `state` **[Object][4]** The path to the reducer state key we want to check for truthiness.
 -   `connect` **[Function][5]** The connect function to use for connecting to redux.
 
 ### Examples
@@ -35,14 +35,11 @@ import LandingPage from "./pages/landing"
 
 const ToggledIndex = createToggledComponent({
   connect,
+  state: "core.authentication.isAuthenticated",
   components: {
      Authenticated: HomePage,
      Anonymous: LandingPage,
   },
-  reducer: {
-     name: "auth",
-     key: "isAuthenticated",
-  }
 })
 
 function App(props) {
