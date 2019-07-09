@@ -2,4 +2,4 @@ import "core-js/stable"
 
 export { createToggledComponent } from "./createToggledComponent"
 export { createRedirectedComponent } from "./createRedirectedComponent"
-import { createRouteComponent } from "./createRouteComponent"
+export { createRouteComponent } from "./createRouteComponent"
