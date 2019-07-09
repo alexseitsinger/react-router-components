@@ -1,7 +1,9 @@
-export function reportRoutes(isEnabled, mainRoutes, modalRoutes){
+import _ from "underscore"
+
+export function reportRoutes(report, mainRoutes, modalRoutes){
   const isNotProduction = (process.env.NODE_ENV !== "production")
 
-  if(isEnabled && isNotProduction){
+  if(isNotProduction) {
     const mainRoutePaths = mainRoutes.map((route, i) => {
       const number = (i + 1)
       const path = route.props.path
@@ -24,6 +26,11 @@ export function reportRoutes(isEnabled, mainRoutes, modalRoutes){
       ("  " + (modalRoutePaths.length ? modalRoutePaths : "None")),
     ].join("\n")
 
-    console.log(message)
+    if (report === true) {
+      console.log(message)
+    }
+    else if (_.isFunction(report)){
+      report(message)
+    }
   }
 }
