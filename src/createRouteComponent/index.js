@@ -72,7 +72,7 @@ export function createRouteComponent({ Switch, Route, config, reportRoutes = fal
         return `${number}) ${path}, ${exact}`
       }).join("\n  ")
       const message = [
-        "[react-nested-routes]",
+        "[react-router-components]",
         "Main Routes",
         ("  " + (mainRoutePaths.length ? mainRoutePaths : "None")),
         "Modal Routes",
