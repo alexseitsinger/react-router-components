@@ -1,5 +1,6 @@
 import React from "react"
 import { MemoryRouter, StaticRouter, Switch, Route } from "react-router"
+
 import { createRouteComponent } from "../src"
 
 const setup = (url, config) => {
