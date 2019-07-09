@@ -1,8 +1,8 @@
-export function getStateValue(state, bits) {
-  var currentObj = state
+export function getStateValue(state, key, bits) {
+  var obj = state
   bits.forEach(bit => {
-    currentObj = currentObj[bit]
+    obj = obj[bit]
   })
-  return currentObj[key]
+  return obj[key]
 }
 

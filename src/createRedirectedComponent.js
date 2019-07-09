@@ -51,7 +51,7 @@ export function createRedirectedComponent({
   connect,
   Component,
   state,
-  redirect = "/",
+  url = "/",
 }){
   const bits = state.split(".")
   const key = bits.pop()
@@ -60,11 +60,11 @@ export function createRedirectedComponent({
     if(key && key in props && props[key] === true){
       return <Component {...props} />
     }
-    return <Redirect to={redirect} />
+    return <Redirect to={url} />
   }
 
   const mapState = state => ({
-    [key]: getStateValue(state, bits),
+    [key]: getStateValue(state, key, bits),
   })
 
   return connect(mapState)(RedirectedComponent)

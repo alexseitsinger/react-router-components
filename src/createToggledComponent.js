@@ -65,7 +65,7 @@ export function createToggledComponent({
   }
 
   const mapState = state => ({
-    [key]: getStateValue(state, bits)
+    [key]: getStateValue(state, key, bits)
   })
 
   return connect(mapState)(ToggledComponent)
