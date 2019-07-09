@@ -1,3 +1,10 @@
+<a name="v2.2.1"></a>
+## [v2.2.1](https://github.com/alexseitsinger/react-router-components/compare/v2.2.0...v2.2.1) (2019-07-09)
+
+### Bug Fixes
+- Adds callback for reports. ([00d6fd7](https://github.com/alexseitsinger/react-router-components/commit/00d6fd7a7fa1dbb728caa66472c399ec1c37b90e))
+
+
 <a name="v2.2.0"></a>
 ## [v2.2.0](https://github.com/alexseitsinger/react-router-components/compare/v2.1.0...v2.2.0) (2019-07-09)
 
