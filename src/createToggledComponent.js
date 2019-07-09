@@ -1,5 +1,5 @@
 import React from "react"
-
+import { getStateValue } from "./utils"
 
 /**
  * Returns a connected component that renders another component based on the
@@ -64,16 +64,8 @@ export function createToggledComponent({
     return <Anonymous {...props} />
   }
 
-  const getStateValue = (stateObj) => {
-    var currentObj = stateObj
-    bits.forEach(bit => {
-      currentObj = currentObj[bit]
-    })
-    return currentObj[key]
-  }
-
   const mapState = state => ({
-    [key]: getStateValue(state)
+    [key]: getStateValue(state, bits)
   })
 
   return connect(mapState)(ToggledComponent)
