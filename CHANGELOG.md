@@ -1,3 +1,10 @@
+<a name="v2.2.0"></a>
+## [v2.2.0](https://github.com/alexseitsinger/react-router-components/compare/v2.1.0...v2.2.0) (2019-07-09)
+
+### Features
+- Moves reportRoutes to own module. ([c574af6](https://github.com/alexseitsinger/react-router-components/commit/c574af688297c430108b5523edbb3fba6f11f5f3))
+
+
 <a name="v2.1.0"></a>
 ## [v2.1.0](https://github.com/alexseitsinger/react-router-components/compare/v2.0.0...v2.1.0) (2019-07-09)
 
