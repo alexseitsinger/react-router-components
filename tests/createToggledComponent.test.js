@@ -1,42 +1,26 @@
 import React from "react"
 import { Provider, connect } from "react-redux"
-import { createStore, combineReducers } from "redux"
 
 import { createToggledComponent } from "../src"
-
+import {
+  setAuthenticated,
+  isAuthenticatedState,
+  createStore,
+} from "./redux"
 
 function AuthenticatedComponent(){
   return (<div>Authenticated</div>)
 }
 
+const authenticatedHTML = "<div>Authenticated</div>"
+
 function AnonymousComponent(){
   return (<div>Anonymous</div>)
 }
 
-const rootReducer = combineReducers({
-  auth: (state = {isAuthenticated: false}, action) => {
-    switch (action.type) {
-      default: {
-        return state
-      }
-      case "IS_AUTHENTICATED": {
-        return {
-          ...state,
-          isAuthenticated: action.bool,
-        }
-      }
-    }
-  },
-})
+const anonymousHTML = "<div>Anonymous</div>"
 
-const store = createStore(rootReducer)
-
-const setAuthenticated = bool => ({
-  type: "IS_AUTHENTICATED",
-  bool,
-})
-
-function mountWithProvider(Component) {
+function setup(store, Component) {
   return mount(
     <Provider store={store}>
       <Component />
@@ -46,51 +30,57 @@ function mountWithProvider(Component) {
 
 describe("createToggledComponent", () => {
   it("renders anonymous component when state matches", () => {
+    const store = createStore()
+
     store.dispatch(setAuthenticated(false))
 
     const ToggledComponent = createToggledComponent({
       connect,
-      state: "auth.isAuthenticated",
+      target: isAuthenticatedState,
       components: {
         Authenticated: AuthenticatedComponent,
         Anonymous: AnonymousComponent,
       },
     })
 
-    const wrapper = mountWithProvider(ToggledComponent)
+    const wrapper = setup(store, ToggledComponent)
 
-    expect(wrapper.html()).toBe("<div>Anonymous</div>")
+    expect(wrapper.html()).toBe(anonymousHTML)
   })
   it("renders authenticated component when state matches", () => {
+    const store = createStore()
+
     store.dispatch(setAuthenticated(true))
 
     const ToggledComponent = createToggledComponent({
       connect,
-      state: "auth.isAuthenticated",
+      target: isAuthenticatedState,
       components: {
         Authenticated: AuthenticatedComponent,
         Anonymous: AnonymousComponent
       }
     })
 
-    const wrapper = mountWithProvider(ToggledComponent)
+    const wrapper = setup(store, ToggledComponent)
 
-    expect(wrapper.html()).toBe("<div>Authenticated</div>")
+    expect(wrapper.html()).toBe(authenticatedHTML)
   })
   it("renders anonymous component when state doesnt match", () => {
+    const store = createStore()
+
     store.dispatch(setAuthenticated(null))
 
     const ToggledComponent = createToggledComponent({
       connect,
-      state: "auth.isAuthenticated",
+      target: isAuthenticatedState,
       components: {
         Authenticated: AuthenticatedComponent,
         Anonymous: AnonymousComponent
       }
     })
 
-    const wrapper = mountWithProvider(ToggledComponent)
+    const wrapper = setup(store, ToggledComponent)
 
-    expect(wrapper.html()).toBe("<div>Anonymous</div>")
+    expect(wrapper.html()).toBe(anonymousHTML)
   })
 })
