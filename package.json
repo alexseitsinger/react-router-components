@@ -1,9 +1,9 @@
 {
-  "name": "@alexseitsinger/react-toggled-component",
+  "name": "@alexseitsinger/react-router-components",
   "version": "1.0.0",
-  "description": "Returns a connected component that renders another component based on the state",
+  "description": "Components that should be used with react router.",
   "main": "dist/main.js",
-  "homepage": "https://www.alexseitsinger.com/packages/node/react-toggled-component",
+  "homepage": "https://www.alexseitsinger.com/packages/node/react-router-components",
   "author": {
     "name": "Alex Seitsinger",
     "email": "software@alexseitsinger.com",
@@ -12,10 +12,10 @@
   "license": "BSD-2-Clause",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexseitsinger/react-toggled-component.git"
+    "url": "https://github.com/alexseitsinger/react-router-components.git"
   },
   "bugs": {
-    "url": "https://github.com/alexseitsinger/react-toggled-component/issues"
+    "url": "https://github.com/alexseitsinger/react-router-components/issues"
   },
   "files": [
     "dist/main.js",
@@ -27,6 +27,7 @@
     "react",
     "redux",
     "toggled",
+    "redirected",
     "component"
   ],
   "devDependencies": {
