@@ -8,11 +8,11 @@ import { getStateValue } from "./utils"
  * @param {object} config
  * @param {object} config.Component
  * The component to render if the state is truthy.
- * @param {string} config.state
+ * @param {string} config.target
  * The path to the reducer state key we want to check for truthiness.
  * @param {function} config.connect
  * The connect function to use for connecting to redux.
- * @param {string} config.redirect
+ * @param {string} config.url
  * The pathname to redirect to if state isn't truthy.
  *
  * @return {function}
@@ -49,11 +49,11 @@ import { getStateValue } from "./utils"
  */
 export function createRedirectedComponent({
   connect,
+  target,
   Component,
-  state,
   url = "/",
 }){
-  const bits = state.split(".")
+  const bits = target.split(".")
   const key = bits.pop()
 
   function RedirectedComponent(props) {

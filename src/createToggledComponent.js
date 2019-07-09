@@ -11,7 +11,7 @@ import { getStateValue } from "./utils"
  * The component to render when the state is truthy.
  * @param {function} config.components.Anonymous
  * The component to render when the state is not truthy.
- * @param {string} config.state
+ * @param {string} config.target
  * The path to the reducer state key we want to check for truthiness.
  * @param {function} config.connect
  * The connect function to use for connecting to redux.
@@ -23,7 +23,7 @@ import { getStateValue } from "./utils"
  * import React from "react"
  * import { Provider, connect } from "react-redux"
  * import { Router, Route } from "react-router"
- * import { createToggledComponent } from "@alexseitsinger/react-toggled-component"
+ * import { createToggledComponent } from "@alexseitsinger/react-router-components"
  *
  * import HomePage from "./pages/home"
  * import LandingPage from "./pages/landing"
@@ -50,11 +50,11 @@ import { getStateValue } from "./utils"
  * export default App
  */
 export function createToggledComponent({
-  components: { Anonymous, Authenticated },
-  state,
   connect,
+  target,
+  components: { Anonymous, Authenticated },
 }){
-  const bits = state.split(".")
+  const bits = target.split(".")
   const key = bits.pop()
 
   function ToggledComponent(props) {
