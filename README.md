@@ -46,6 +46,57 @@ export default App
 
 Returns **[function][2]** A connected component that has some state mapped.
 
+## createRouteComponent
+
+Creates a stateless functional component for use in the root route. Routes that are marked with `modal: true` are rendered WITH their parent route component.
+
+### Parameters
+
+-   `config` **[Object][1]** An object of route configurations.
+    -   `config.Switch`  
+    -   `config.Route`  
+    -   `config.config`  
+    -   `config.reportRoutes`   (optional, default `false`)
+
+### Examples
+
+```javascript
+import React from "react"
+import { Router, Route, Switch } from "react-router"
+import { createRouteComponent }  from "@alexseitsinger/react-router-components"
+
+import LandingPage from "./pages/landing"
+import AboutPage from "./pages/about"
+import AboutModalPage from "./pages/about-modal"
+import NotFoundPage from "./pages/not-found"
+
+const config = {
+  path: "/",
+  Component: LandingPage,
+  routes: [
+    {path: "*", Component: NotFoundPage},
+    {path: "about", Component: AboutPage, routes: [
+      {path: "modal", Component: AboutModalPage, modal: true},
+    ]}
+  ]
+}
+
+function App(props) {
+  const RouteComponent = createRouteComponent({ Switch, Route, config })
+  return (
+    <Router>
+      <Layout>
+        <Route component={RouteComponent} />
+      </Layout>
+    </Router>
+  )
+}
+
+export default App
+```
+
+Returns **[Function][2]** A stateless functional component to be used in the root route.
+
 ## createToggledComponent
 
 Returns a connected component that renders another component based on the
