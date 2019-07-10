@@ -3,11 +3,10 @@ export function removeDuplicateForwardSlashes(pathname) {
 }
 
 export function setFullPath(basePath, config) {
-  const fullPath = removeDuplicateForwardSlashes(`${basePath}/${config.path}`)
-  config.path = fullPath
+  config.basePath = basePath
   if(config.routes) {
     config.routes.forEach(obj => {
-      setFullPath(fullPath, obj)
+      setFullPath(config.path, obj)
     })
   }
 }
