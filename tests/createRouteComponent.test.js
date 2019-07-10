@@ -22,6 +22,7 @@ const Another = () => <div>Another</div>
 
 describe("createRouteComponent", () => {
   // test that parentpaths get set correctly.
+  // add test for duplicate pathnmames being added.
   it("renders multiple nested paths", () => {
     const wrapper = setup("/", {
       path: "/",
