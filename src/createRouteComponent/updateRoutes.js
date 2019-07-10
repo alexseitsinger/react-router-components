@@ -1,6 +1,7 @@
 import React from "react"
 
 import { composeRoute } from "./composeRoute"
+import { removeDuplicateForwardSlashes } from "./utils"
 
 export function updateRoutes({
   config: {
@@ -9,6 +10,7 @@ export function updateRoutes({
     routes,
     modal = false,
     exact = true,
+    basePath,
   },
   rootProps,
   mainRoutes,
@@ -29,6 +31,11 @@ export function updateRoutes({
   routes.forEach((route) => {
     // If it's a wildcard path, fix it.
     var routePath = route.path
+    var prefix = removeDuplicateForwardSlashes(`/${basePath}/${route.basePath}`)
+    if(!( routePath.startsWith(prefix))){
+      routePath = removeDuplicateForwardSlashes(`${prefix}/${routePath}`)
+    }
+
     if(routePath === "/*"){
       routePath = "*"
     }
