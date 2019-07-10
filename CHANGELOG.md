@@ -1,3 +1,14 @@
+<a name="v2.2.3"></a>
+## [v2.2.3](https://github.com/alexseitsinger/react-router-components/compare/v2.2.2...v2.2.3) (2019-07-10)
+
+### Code Refactoring
+- Fixes `setFullPath`. ([7569756](https://github.com/alexseitsinger/react-router-components/commit/756975601952aa1e82b3dded414023c21cb7f0b5))
+- Fixes duplicate paths being added. ([c189f63](https://github.com/alexseitsinger/react-router-components/commit/c189f63c766962b2dc774bce85d31247b493aeb1))
+
+### Features
+- Caches generated routes. ([a4273f7](https://github.com/alexseitsinger/react-router-components/commit/a4273f76f938fcda595ce14e8ed2b40df26f19a2))
+
+
 <a name="v2.2.2"></a>
 ## [v2.2.2](https://github.com/alexseitsinger/react-router-components/compare/v2.2.1...v2.2.2) (2019-07-10)
 
