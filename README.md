@@ -56,7 +56,7 @@ Creates a stateless functional component for use in the root route. Routes that 
     -   `config.Switch`  
     -   `config.Route`  
     -   `config.config`  
-    -   `config.reportRoutes`   (optional, default `false`)
+    -   `config.report`   (optional, default `false`)
 
 ### Examples
 
