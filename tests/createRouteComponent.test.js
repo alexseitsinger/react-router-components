@@ -12,12 +12,31 @@ const setup = (url, config) => {
   )
 }
 
-const About = () => <div>About</div>
-const AboutModal = () => <div>AboutModal</div>
 const Index = () => <div>Index</div>
 const NotFound = () => <div>Not Found</div>
+const About = () => <div>About</div>
+const AboutModal = () => <div>AboutModal</div>
+const Team = () => <div>Team</div>
+const Alex = () => <div>Alex</div>
+const Another = () => <div>Another</div>
 
 describe("createRouteComponent", () => {
+  // test that parentpaths get set correctly.
+  it("renders multiple nested paths", () => {
+    const wrapper = setup("/", {
+      path: "/",
+      Component: Index,
+      routes: [
+        {path: "*", component: NotFound},
+        {path: "/about", component: About, routes: [
+          {path: "/another", component: Another},
+          {path: "/team", component: Team, routes: [
+            {path: "/alex", component: Alex},
+          ]},
+        ]}
+      ]
+    })
+  })
   it("renders <Index /> when URL matches", () => {
     const wrapper = setup("/", {
       path: "/",
@@ -44,7 +63,7 @@ describe("createRouteComponent", () => {
       Component: Index,
       routes: [
         {path: "/about", Component: About, routes: [
-          {path: "/about/modal", Component: AboutModal, modal: true}
+          {path: "/modal", Component: AboutModal, modal: true}
         ]},
         {path: "*", Component: NotFound},
       ]
