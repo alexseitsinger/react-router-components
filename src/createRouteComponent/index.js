@@ -55,9 +55,18 @@ import { reportRoutes } from "./reportRoutes"
  * export default App
  */
 export function createRouteComponent({ Switch, Route, config, report = false }) {
+  var mainRoutes
+  var modalRoutes
+
   return function RouteComponent(rootProps) {
-    const { mainRoutes, modalRoutes } = generateRoutes({ config, rootProps, Route })
+    if(!( mainRoutes && modalRoutes )) {
+      const generatedRoutes = generateRoutes({ config, rootProps, Route })
+      mainRoutes = generatedRoutes.mainRoutes
+      modalRoutes = generatedRoutes.modalRoutes
+    }
+
     reportRoutes(report, mainRoutes, modalRoutes)
+
     return (
       <React.Fragment>
         <Switch>
