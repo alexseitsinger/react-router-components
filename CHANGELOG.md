@@ -1,3 +1,15 @@
+<a name="v2.2.2"></a>
+## [v2.2.2](https://github.com/alexseitsinger/react-router-components/compare/v2.2.1...v2.2.2) (2019-07-10)
+
+### Code Refactoring
+- Removes path combining. ([a46163b](https://github.com/alexseitsinger/react-router-components/commit/a46163b56e8ea07506b899668466eb3f023f7ceb))
+- Str concat to template literal. ([08bf751](https://github.com/alexseitsinger/react-router-components/commit/08bf7515e89dc5f572216810d30af0bbaf2e5f46))
+
+### Features
+- Adds `setFullPath` method. ([fc27322](https://github.com/alexseitsinger/react-router-components/commit/fc273227ad9f0cc4bedb6988327828f204b920b5))
+- Adds utils to `createRouteComponent`. ([ace8d72](https://github.com/alexseitsinger/react-router-components/commit/ace8d72889c613f87cce8b3c7aa76f10f187c311))
+
+
 <a name="v2.2.1"></a>
 ## [v2.2.1](https://github.com/alexseitsinger/react-router-components/compare/v2.2.0...v2.2.1) (2019-07-09)
 
