@@ -3,16 +3,16 @@ import React from "react"
 import { composeRoute } from "./composeRoute"
 
 export function updateRoutes({
-  config: { 
-    path, 
-    Component, 
-    routes, 
-    modal = false, 
-    exact = true 
+  config: {
+    path,
+    Component,
+    routes,
+    modal = false,
+    exact = true,
   },
-  rootProps, 
-  mainRoutes, 
-  modalRoutes, 
+  rootProps,
+  mainRoutes,
+  modalRoutes,
   Route
 }) {
   // Add the index route
@@ -27,18 +27,13 @@ export function updateRoutes({
 
   // If there are sub-routes, iterate over them, and add any we find.
   routes.forEach((route) => {
-    // Normalize the path
-    var routePath = route.path
-    if(!routePath.startsWith(path)){
-      // Replace multiple slashes with one.
-      routePath = `/${path}/${routePath}`.replace(/(\/)\/+/g, "$1")
-    }
     // If it's a wildcard path, fix it.
-		if(routePath === "/*"){
-			routePath = "*"
+    var routePath = route.path
+    if(routePath === "/*"){
+      routePath = "*"
     }
 
-    // If its a modal route, create it. 
+    // If its a modal route, create it.
     // Them, add a corresponding main route.
     // Oterhwise, just make a main route.
     if(route.modal && route.modal === true) {
@@ -51,7 +46,7 @@ export function updateRoutes({
       }))
       mainRoutes.push(composeRoute({
         path: routePath,
-        Component, 
+        Component,
         rootProps,
         exact: true,
         Route,
@@ -66,8 +61,9 @@ export function updateRoutes({
         Route,
       }))
     }
+
     // Repeat this process for each route object also.
     updateRoutes({ config: route,  rootProps, mainRoutes, modalRoutes, Route })
-	})
+  })
 }
 
