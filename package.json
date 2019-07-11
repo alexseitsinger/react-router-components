@@ -1,6 +1,6 @@
 {
   "name": "@alexseitsinger/react-router-components",
-  "version": "2.2.3",
+  "version": "2.3.0",
   "description": "Components that should be used with react router.",
   "main": "dist/main.js",
   "homepage": "https://www.alexseitsinger.com/packages/node/react-router-components",
