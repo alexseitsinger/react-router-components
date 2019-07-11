@@ -54,18 +54,27 @@ import { generateRoutes, reportRoutes } from "./utils"
  *
  * export default App
  */
-var currentConfig
-var currentRoutes
+let created = []
+
 export function createRouteComponent({ Switch, Route, config, report = false }) {
   return function RouteComponent(rootProps) {
-    // Generate new routes whenver they change.
-    if(!currentConfig || equals(config, currentConfig) === false) {
-      currentConfig = config
-      currentRoutes = generateRoutes({ config, rootProps, Route })
+    var target
+
+    created.forEach(obj => {
+      if(obj.config && equals(obj.config, config) === true) {
+        target = obj
+      }
+    })
+
+    if(!target) {
+      target = {
+        config,
+        routes: generateRoutes({ config, rootProps, Route }),
+      }
     }
 
     // Extract the routes.
-    const { mainRoutes, modalRoutes } = currentRoutes
+    const { mainRoutes, modalRoutes } = target.routes
 
     // Report the routes
     reportRoutes(report, mainRoutes, modalRoutes)
