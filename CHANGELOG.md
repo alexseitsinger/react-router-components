@@ -1,3 +1,10 @@
+<a name="v2.3.1"></a>
+## [v2.3.1](https://github.com/alexseitsinger/react-router-components/compare/v2.3.0...v2.3.1) (2019-07-11)
+
+### Bug Fixes
+- Moves cached settings outside function. ([5c291a9](https://github.com/alexseitsinger/react-router-components/commit/5c291a98bd08b08627724f9ac88b571cbd8e6b5e))
+
+
 <a name="v2.3.0"></a>
 ## [v2.3.0](https://github.com/alexseitsinger/react-router-components/compare/v2.2.3...v2.3.0) (2019-07-11)
 
