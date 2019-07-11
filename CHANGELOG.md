@@ -1,3 +1,10 @@
+<a name="v2.4.1"></a>
+## [v2.4.1](https://github.com/alexseitsinger/react-router-components/compare/v2.4.0...v2.4.1) (2019-07-11)
+
+### Bug Fixes
+- Fixes basePath generation. ([8db4e9c](https://github.com/alexseitsinger/react-router-components/commit/8db4e9c76fca381ec2a68d3f225c3919f632dd7d))
+
+
 <a name="v2.4.0"></a>
 ## [v2.4.0](https://github.com/alexseitsinger/react-router-components/compare/v2.3.1...v2.4.0) (2019-07-11)
 
