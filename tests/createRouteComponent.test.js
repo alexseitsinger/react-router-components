@@ -19,6 +19,8 @@ const AboutModal = () => <div>AboutModal</div>
 const Team = () => <div>Team</div>
 const Alex = () => <div>Alex</div>
 const Another = () => <div>Another</div>
+const Test = () => <div>Test</div>
+const Aside = () => <div>Aside</div>
 
 describe("createRouteComponent", () => {
   // test that parentpaths get set correctly.
@@ -100,4 +102,25 @@ describe("createRouteComponent", () => {
     expect(wrapper.find(About)).toHaveLength(1)
     expect(wrapper.find(Alex)).toHaveLength(1)
   })
+  it("generated correct paths for deeply nested routes.", () => {
+    const wrapper = setup("/about/team/alex/another/test", {
+      path: "/",
+      Component: Index,
+      routes: [
+        {path: "aside", Component: Aside},
+        {path: "about", Component: About, routes: [
+          {path: "team", Component: Team, routes: [
+            {path: "alex", Component: Alex, routes: [
+              {path: "another", Component: Another, modal: true, routes: [
+                {path: "test", Component: Test, modal: true},
+              ]}
+            ]},
+          ]}
+        ]},
+      ]
+    })
+    expect(wrapper.find(Alex)).toHaveLength(1)
+    expect(wrapper.find(Test)).toHaveLength(1)
+  })
+
 })
