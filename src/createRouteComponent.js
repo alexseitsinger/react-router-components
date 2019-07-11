@@ -1,7 +1,7 @@
 import React from "react"
+import equals from "shallow-equals"
 
-import { generateRoutes } from "./generateRoutes"
-import { reportRoutes } from "./reportRoutes"
+import { generateRoutes, reportRoutes } from "./utils"
 
 // ***NOTE***
 // Since React-Router & React-Router-DOM use a context object.
@@ -55,18 +55,23 @@ import { reportRoutes } from "./reportRoutes"
  * export default App
  */
 export function createRouteComponent({ Switch, Route, config, report = false }) {
-  var mainRoutes
-  var modalRoutes
+  var lastConfig
+  var lastRoutes
 
   return function RouteComponent(rootProps) {
-    if(!( mainRoutes && modalRoutes )) {
-      const generatedRoutes = generateRoutes({ config, rootProps, Route })
-      mainRoutes = generatedRoutes.mainRoutes
-      modalRoutes = generatedRoutes.modalRoutes
+    // Generate new routes whenver they change.
+    if(!lastConfig || equals(config, lastConfig) === false) {
+      lastConfig = config
+      lastRoutes = generateRoutes({ config, rootProps, Route })
     }
 
+    // Extract the routes.
+    const { mainRoutes, modalRoutes } = lastRoutes
+
+    // Report the routes
     reportRoutes(report, mainRoutes, modalRoutes)
 
+    // Render the routes.
     return (
       <React.Fragment>
         <Switch>
