@@ -26,7 +26,10 @@ export function generateRoutes({ config, rootProps, Route }){
   const modalRoutes = []
 
   // Set the parents on each config object so we can build the paths easily.
-  setBasePath("/", config)
+  setRuntimeConfig({
+    config,
+    parentConfig: config,
+  })
 
   // Create the routes for the config.
   updateRoutes({ config, rootProps, mainRoutes, modalRoutes, Route })
@@ -46,28 +49,24 @@ export function generateRoutes({ config, rootProps, Route }){
 }
 
 
+function createRoutesReport(routes) {
+  return routes.map((route) => {
+    const path = route.props.path
+    const exact = route.props.exact ? route.props.exact : false
+    return "  " + path + ", " + exact
+  }).join("\n")
+}
+
 
 export function reportRoutes(report, mainRoutes, modalRoutes){
-  const mainRoutePaths = mainRoutes.map((route, i) => {
-    const number = (i + 1)
-    const path = route.props.path
-    const exact = route.props.exact ? route.props.exact : false
-    return `${number}) ${path}, ${exact}`
-  }).join("\n  ")
-
-  const modalRoutePaths = modalRoutes.map((route, i) => {
-    const number = (i + 1)
-    const path = route.props.path
-    const exact = route.props.exact ? route.props.exact : false
-    return `${number}) ${path}, ${exact}`
-  }).join("\n  ")
-
+  const mainRoutesReport = createRoutesReport(mainRoutes)
+  const modalRoutesReport = createRoutesReport(modalRoutes)
   const message = [
     "[react-router-components]",
     "Main Routes",
-    ("  " + (mainRoutePaths.length ? mainRoutePaths : "None")),
+    (mainRoutesReport.length ? mainRoutesReport : "  None"),
     "Modal Routes",
-    ("  " + (modalRoutePaths.length ? modalRoutePaths : "None")),
+    (modalRoutesReport.length ? modalRoutesReport : "  None"),
   ].join("\n")
 
   if (report === true) {
@@ -78,6 +77,16 @@ export function reportRoutes(report, mainRoutes, modalRoutes){
   }
 }
 
+function getFirstNonModalParentConfig(config) {
+  var pc = config.parentConfig
+  if(!pc.modal || pc.modal && pc.modal === false) {
+    return pc
+  }
+  if(pc.modal && pc.modal === true) {
+    return getFirstNonModalParentConfig(pc)
+  }
+}
+
 export function updateRoutes({
   config: {
     path,
@@ -85,7 +94,7 @@ export function updateRoutes({
     routes,
     modal = false,
     exact = true,
-    basePath,
+    parentConfig,
   },
   rootProps,
   mainRoutes,
@@ -106,7 +115,7 @@ export function updateRoutes({
   routes.forEach((route) => {
     // If it's a wildcard path, fix it.
     var routePath = route.path
-    var prefix = removeDuplicateForwardSlashes(`/${basePath}/${route.basePath}`)
+    var prefix = removeDuplicateForwardSlashes(`/${parentConfig.path}/${route.parentConfig.path}`)
     if(!( routePath.startsWith(prefix))){
       routePath = removeDuplicateForwardSlashes(`${prefix}/${routePath}`)
     }
@@ -115,10 +124,8 @@ export function updateRoutes({
       routePath = "*"
     }
 
-    // If its a modal route, create it.
-    // Them, add a corresponding main route.
-    // Oterhwise, just make a main route.
     if(route.modal && route.modal === true) {
+      // Create a modal route that renders the modal.
       modalRoutes.push(composeRoute({
         path: routePath,
         Component: route.Component,
@@ -126,9 +133,13 @@ export function updateRoutes({
         exact: true,
         Route,
       }))
+
+      // Create a main route that renders the background page when the modal is
+      // open.
+      //
       mainRoutes.push(composeRoute({
         path: routePath,
-        Component,
+        Component: getFirstNonModalParentConfig(route).Component,
         rootProps,
         exact: true,
         Route,
@@ -149,17 +160,21 @@ export function updateRoutes({
   })
 }
 
-
-
 export function removeDuplicateForwardSlashes(pathname) {
     return pathname.replace(/(\/)\/+/g, "$1")
 }
 
-export function setBasePath(basePath, config) {
-  config.basePath = basePath
+export function setRuntimeConfig({ config, parentConfig }) {
+  // Set the options for this config.
+  config.parentConfig = parentConfig
+
+  // If there are routes, set the options for each one of them as well.
   if(config.routes) {
-    config.routes.forEach(obj => {
-      setBasePath(config.path, obj)
+    config.routes.forEach(route => {
+      setRuntimeConfig({
+        config: route,
+        parentConfig: config,
+      })
     })
   }
 }
