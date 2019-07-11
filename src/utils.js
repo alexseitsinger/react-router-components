@@ -87,6 +87,16 @@ function getFirstNonModalParentConfig(config) {
   }
 }
 
+function getBasePath(config) {
+  var bits = []
+  var pc = config.parentConfig
+  while (pc.path !== '/') {
+    bits.push(pc.path)
+    pc = pc.parentConfig
+  }
+  return removeDuplicateForwardSlashes(`/${bits.reverse().join("/")}`)
+}
+
 export function updateRoutes({
   config: {
     path,
@@ -115,9 +125,10 @@ export function updateRoutes({
   routes.forEach((route) => {
     // If it's a wildcard path, fix it.
     var routePath = route.path
-    var prefix = removeDuplicateForwardSlashes(`/${parentConfig.path}/${route.parentConfig.path}`)
-    if(!( routePath.startsWith(prefix))){
-      routePath = removeDuplicateForwardSlashes(`${prefix}/${routePath}`)
+
+    const basePath = getBasePath(route)
+    if(!( routePath.startsWith(basePath) )){
+      routePath = removeDuplicateForwardSlashes(`/${basePath}/${routePath}`)
     }
 
     if(routePath === "/*"){
