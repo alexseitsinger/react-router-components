@@ -1,3 +1,11 @@
+<a name="v2.4.0"></a>
+## [v2.4.0](https://github.com/alexseitsinger/react-router-components/compare/v2.3.1...v2.4.0) (2019-07-11)
+
+### Code Refactoring
+- Caches configs to re-use routes. ([1592083](https://github.com/alexseitsinger/react-router-components/commit/1592083399ca31a0799fd0489e5334fdf911fdd7))
+- Saves parentConfigs at runtime. ([3cd1399](https://github.com/alexseitsinger/react-router-components/commit/3cd1399116f183967766715972970ca9ee81dc2c))
+
+
 <a name="v2.3.1"></a>
 ## [v2.3.1](https://github.com/alexseitsinger/react-router-components/compare/v2.3.0...v2.3.1) (2019-07-11)
 
