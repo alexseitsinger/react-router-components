@@ -1,3 +1,10 @@
+<a name="v2.3.0"></a>
+## [v2.3.0](https://github.com/alexseitsinger/react-router-components/compare/v2.2.3...v2.3.0) (2019-07-11)
+
+### Features
+- Shallow compares configs for renders. ([565e954](https://github.com/alexseitsinger/react-router-components/commit/565e95430f17cb65db7f5223a63bfd9567226f70))
+
+
 <a name="v2.2.3"></a>
 ## [v2.2.3](https://github.com/alexseitsinger/react-router-components/compare/v2.2.2...v2.2.3) (2019-07-10)
 
