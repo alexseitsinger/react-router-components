@@ -24,15 +24,17 @@ describe("createRouteComponent", () => {
   // test that parentpaths get set correctly.
   // add test for duplicate pathnmames being added.
   it("renders multiple nested paths", () => {
+    console.log(Index.name)
+
     const wrapper = setup("/", {
       path: "/",
       Component: Index,
       routes: [
-        {path: "*", component: NotFound},
-        {path: "/about", component: About, routes: [
-          {path: "/another", component: Another},
-          {path: "/team", component: Team, routes: [
-            {path: "/alex", component: Alex},
+        {path: "*", Component: NotFound},
+        {path: "/about", Component: About, routes: [
+          {path: "/another", Component: Another},
+          {path: "/team", Component: Team, routes: [
+            {path: "/alex", Component: Alex},
           ]},
         ]}
       ]
@@ -82,5 +84,20 @@ describe("createRouteComponent", () => {
       ]
     })
     expect(wrapper.find(About)).toHaveLength(1)
+  })
+  it("renders correct component for nested modals.", () => {
+    const wrapper = setup("/about/team/alex", {
+      path: "/",
+      Component: Index,
+      routes: [
+        {path: "about", Component: About, routes: [
+          {path: "team", Component: Team, modal: true, routes: [
+            {path: "alex", Component: Alex, modal: true},
+          ]}
+        ]},
+      ]
+    })
+    expect(wrapper.find(About)).toHaveLength(1)
+    expect(wrapper.find(Alex)).toHaveLength(1)
   })
 })
