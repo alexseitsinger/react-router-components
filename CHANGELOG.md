@@ -1,3 +1,13 @@
+<a name="v3.0.0"></a>
+## [v3.0.0](https://github.com/alexseitsinger/react-router-components/compare/v2.4.1...v3.0.0) (2019-07-12)
+
+### Code Refactoring
+- Renames module. ([af7f1fb](https://github.com/alexseitsinger/react-router-components/commit/af7f1fb1b60fc6b0200639d72297a413eb80fd48))
+
+### Features
+- Adds `createConnected` method. ([aaeed20](https://github.com/alexseitsinger/react-router-components/commit/aaeed201fd774da9d97ef44cf893d762b4a62112))
+
+
 <a name="v2.4.1"></a>
 ## [v2.4.1](https://github.com/alexseitsinger/react-router-components/compare/v2.4.0...v2.4.1) (2019-07-11)
 
