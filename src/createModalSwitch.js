@@ -3,27 +3,25 @@ import equals from "shallow-equals"
 
 import { generateRoutes, reportRoutes } from "./utils"
 
-// ***NOTE***
-// Since React-Router & React-Router-DOM use a context object.
-// Using this package multiple times uses multiple context objects
-// and therefore causes React to throw an invariant error when
-// attempting to mix them. As a result, we (sadly) have to pass the
-// components we want to use (Route, Switch) from the calling scope
-// in order to ensure we use the same context. It's also important to
-// avoid using these components (Route, Switch) outside of a router in
-// our calling scope too. As a result, we have t pass an array of 'routes'
-// to dynamically generate them at runtime. The component that this
-// function generates should be the single component used in a route
-// inside the <App/> component.
-
 /**
- * @description Creates a stateless functional component for use in the root route. Routes that are marked with `modal: true` are rendered WITH their parent route component.
- * @param {Object} config An object of route configurations.
- * @returns {Function} A stateless functional component to be used in the root route.
+ * Creates a stateless functional component for use in the root route. Routes that are marked with `modal: true` are rendered WITH their parent route component.
+ *
+ * @param {object} options An object of route configurations.
+ * @param {object} options.Switch
+ * The Switch component to use
+ * @param {function} options.Route
+ * The Route component to use for each route.
+ * @param {object} options.config
+ * The routes config object to generate routes from.
+ * @param {function|boolean} options.report
+ * The function or boolean to toggle route reports.
+ *
+ * @returns {function} A stateless functional component to be used as the root route.
+ *
  * @example
  * import React from "react"
  * import { Router, Route, Switch } from "react-router"
- * import { createRouteComponent }  from "@alexseitsinger/react-router-components"
+ * import { createModalSwitch }  from "@alexseitsinger/react-router-components"
  *
  * import LandingPage from "./pages/landing"
  * import AboutPage from "./pages/about"
@@ -42,11 +40,11 @@ import { generateRoutes, reportRoutes } from "./utils"
  * }
  *
  * function App(props) {
- *   const RouteComponent = createRouteComponent({ Switch, Route, config })
+ *   const ModalSwitch = createModalSwitch({ Switch, Route, config })
  *   return (
  *     <Router>
  *       <Layout>
- *         <Route component={RouteComponent} />
+ *         <Route component={ModalSwitch} />
  *       </Layout>
  *     </Router>
  *   )
@@ -56,8 +54,8 @@ import { generateRoutes, reportRoutes } from "./utils"
  */
 let created = []
 
-export function createRouteComponent({ Switch, Route, config, report = false }) {
-  return function RouteComponent(rootProps) {
+export function createModalSwitch({ Switch, Route, config, report = false }) {
+  return function ModalSwitch(rootProps) {
     var target
 
     created.forEach(obj => {
