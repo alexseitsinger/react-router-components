@@ -1,13 +1,13 @@
 import React from "react"
 import { MemoryRouter, StaticRouter, Switch, Route } from "react-router"
 
-import { createRouteComponent } from "../src"
+import { createModalSwitch } from "../src"
 
 const setup = (url, config) => {
-  const RouteComponent = createRouteComponent({ Switch, Route, config, report: true })
+  const ModalSwitch = createModalSwitch({ Switch, Route, config, report: true })
   return mount(
     <MemoryRouter initialEntries={[url]}>
-      <Route component={RouteComponent} />
+      <Route component={ModalSwitch} />
     </MemoryRouter>
   )
 }
@@ -22,7 +22,7 @@ const Another = () => <div>Another</div>
 const Test = () => <div>Test</div>
 const Aside = () => <div>Aside</div>
 
-describe("createRouteComponent", () => {
+describe("createModalSwitch", () => {
   // test that parentpaths get set correctly.
   // add test for duplicate pathnmames being added.
   it("renders multiple nested paths", () => {
