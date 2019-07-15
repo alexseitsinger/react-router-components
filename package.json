@@ -45,9 +45,9 @@
     "react-dom": "16.8.6",
     "react-redux": "7.1.0",
     "react-router-dom": "^5.0.1",
-    "redux": "4.0.3",
+    "redux": "4.0.4",
     "webpack": "4.35.3",
-    "webpack-cli": "3.3.5",
+    "webpack-cli": "3.3.6",
     "webpack-node-externals": "1.7.2"
   },
   "dependencies": {
