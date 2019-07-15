@@ -15,7 +15,7 @@ export function composeRoute({ path, Component, routeProps, exact = true, Route 
       key={`route${_.uniqueId()}`}
       path={path}
       exact={exact}
-      render={(routeProps) => <Component {...routeProps} {...routeProps} />}
+      render={(renderProps) => <Component {...routeProps} {...renderProps} />}
     />
   )
 }
