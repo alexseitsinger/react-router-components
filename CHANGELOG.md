@@ -1,3 +1,13 @@
+<a name="v3.0.1"></a>
+## [v3.0.1](https://github.com/alexseitsinger/react-router-components/compare/v3.0.0...v3.0.1) (2019-07-15)
+
+### Bug Fixes
+- Fixes config getter. ([97ae528](https://github.com/alexseitsinger/react-router-components/commit/97ae5280db26b8cba37817fd45c0eb78c98f4239))
+
+### Code Refactoring
+- Updates methods. ([71d3144](https://github.com/alexseitsinger/react-router-components/commit/71d3144c8a4b0f963e82bf2945e93a970a7da5ec))
+
+
 <a name="v3.0.0"></a>
 ## [v3.0.0](https://github.com/alexseitsinger/react-router-components/compare/v2.4.1...v3.0.0) (2019-07-12)
 
