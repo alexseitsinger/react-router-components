@@ -3,6 +3,8 @@ import equals from "shallow-equals"
 
 import { generateRoutes, reportRoutes } from "./utils"
 
+let created = []
+
 /**
  * Creates a stateless functional component for use in the root route. Routes that are marked with `modal: true` are rendered WITH their parent route component.
  *
@@ -52,23 +54,22 @@ import { generateRoutes, reportRoutes } from "./utils"
  *
  * export default App
  */
-let created = []
-
 export function createModalSwitch({ Switch, Route, config, report = false }) {
-  return function ModalSwitch(rootProps) {
+  return function ModalSwitch(routeProps) {
     var target
 
     created.forEach(obj => {
-      if(obj.config && equals(obj.config, config) === true) {
+      if (equals(obj.config, config)) {
         target = obj
       }
     })
 
-    if(!target) {
+    if (!target) {
       target = {
         config,
-        routes: generateRoutes({ config, rootProps, Route }),
+        routes: generateRoutes({ config, routeProps, Route }),
       }
+      created.push(target)
     }
 
     // Extract the routes.
