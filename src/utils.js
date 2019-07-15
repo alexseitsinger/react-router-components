@@ -9,30 +9,30 @@ export function getStateValue(state, key, bits) {
   return obj[key]
 }
 
-export function composeRoute({ path, Component, rootProps, exact = true, Route }) {
+export function composeRoute({ path, Component, routeProps, exact = true, Route }) {
   return (
     <Route
       key={`route${_.uniqueId()}`}
       path={path}
       exact={exact}
-      render={(routeProps) => <Component {...rootProps} {...routeProps} />}
+      render={(routeProps) => <Component {...routeProps} {...routeProps} />}
     />
   )
 }
 
-export function generateRoutes({ config, rootProps, Route }){
+export function generateRoutes({ config, routeProps, Route }){
   // Sort our route into two arrays.
   const mainRoutes = []
   const modalRoutes = []
 
   // Set the parents on each config object so we can build the paths easily.
-  setRuntimeConfig({
+  setParentConfig({
     config,
     parentConfig: config,
   })
 
   // Create the routes for the config.
-  updateRoutes({ config, rootProps, mainRoutes, modalRoutes, Route })
+  updateRoutes({ config, routeProps, mainRoutes, modalRoutes, Route })
 
   // Remove the wildcard route to the bottom of the list.
   mainRoutes.forEach((route, i) => {
@@ -106,14 +106,14 @@ export function updateRoutes({
     exact = true,
     parentConfig,
   },
-  rootProps,
+  routeProps,
   mainRoutes,
   modalRoutes,
   Route
 }) {
   // Add the index route
   if(path === "/"){
-    mainRoutes.push(composeRoute({ path, Component, rootProps, exact, Route }))
+    mainRoutes.push(composeRoute({ path, Component, routeProps, exact, Route }))
   }
 
   // If there are no subroutes, return.
@@ -140,18 +140,17 @@ export function updateRoutes({
       modalRoutes.push(composeRoute({
         path: routePath,
         Component: route.Component,
-        rootProps,
+        routeProps,
         exact: true,
         Route,
       }))
 
       // Create a main route that renders the background page when the modal is
       // open.
-      //
       mainRoutes.push(composeRoute({
         path: routePath,
         Component: getFirstNonModalParentConfig(route).Component,
-        rootProps,
+        routeProps,
         exact: true,
         Route,
       }))
@@ -160,14 +159,14 @@ export function updateRoutes({
       mainRoutes.push(composeRoute({
         path: routePath,
         Component: route.Component,
-        rootProps,
+        routeProps,
         exact: routePath === "*" ? false : true,
         Route,
       }))
     }
 
     // Repeat this process for each route object also.
-    updateRoutes({ config: route,  rootProps, mainRoutes, modalRoutes, Route })
+    updateRoutes({ config: route,  routeProps, mainRoutes, modalRoutes, Route })
   })
 }
 
@@ -175,14 +174,14 @@ export function removeDuplicateForwardSlashes(pathname) {
     return pathname.replace(/(\/)\/+/g, "$1")
 }
 
-export function setRuntimeConfig({ config, parentConfig }) {
+export function setParentConfig({ config, parentConfig }) {
   // Set the options for this config.
   config.parentConfig = parentConfig
 
   // If there are routes, set the options for each one of them as well.
   if(config.routes) {
     config.routes.forEach(route => {
-      setRuntimeConfig({
+      setParentConfig({
         config: route,
         parentConfig: config,
       })
