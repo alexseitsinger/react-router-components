@@ -45,7 +45,7 @@ export const config = {
 
 Returns **[object][1]** A set of methods that use the connect and target state passed.
 
-## created
+## createModalSwitch
 
 Creates a stateless functional component for use in the root route. Routes that are marked with `modal: true` are rendered WITH their parent route component.
 
@@ -55,7 +55,7 @@ Creates a stateless functional component for use in the root route. Routes that 
     -   `options.Switch` **[object][1]** The Switch component to use
     -   `options.Route` **[function][2]** The Route component to use for each route.
     -   `options.config` **[object][1]** The routes config object to generate routes from.
-    -   `options.report` **([function][2] \| [boolean][4])** The function or boolean to toggle route reports.
+    -   `options.report` **([function][2] \| [boolean][4])** The function or boolean to toggle route reports. (optional, default `false`)
 
 ### Examples
 
