@@ -1,3 +1,10 @@
+<a name="v3.0.2"></a>
+## [v3.0.2](https://github.com/alexseitsinger/react-router-components/compare/v3.0.1...v3.0.2) (2019-07-15)
+
+### Bug Fixes
+- Fixes duplicate routeProps. ([cdfb49d](https://github.com/alexseitsinger/react-router-components/commit/cdfb49d86e1ff02f6966f95d3c6b2ab4a6fcc9e4))
+
+
 <a name="v3.0.1"></a>
 ## [v3.0.1](https://github.com/alexseitsinger/react-router-components/compare/v3.0.0...v3.0.1) (2019-07-15)
 
