@@ -84,7 +84,9 @@ export function createModalSwitch({ Switch, Route, config, report = false }) {
         <Switch>
           {mainRoutes}
         </Switch>
-        {modalRoutes}
+        <Switch>
+          {modalRoutes}
+        </Switch>
       </React.Fragment>
     )
   }
