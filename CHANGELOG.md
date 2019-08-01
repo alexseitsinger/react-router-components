@@ -1,3 +1,10 @@
+<a name="v3.0.3"></a>
+## [v3.0.3](https://github.com/alexseitsinger/react-router-components/compare/v3.0.2...v3.0.3) (2019-08-01)
+
+### Bug Fixes
+- Wraps modal routes in second switch. ([c4d2d0f](https://github.com/alexseitsinger/react-router-components/commit/c4d2d0fc53455bc733c37e336c521acaefe9f6c0))
+
+
 <a name="v3.0.2"></a>
 ## [v3.0.2](https://github.com/alexseitsinger/react-router-components/compare/v3.0.1...v3.0.2) (2019-07-15)
 
