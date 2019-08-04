@@ -36,10 +36,10 @@ describe("createToggledComponent", () => {
 
     const ToggledComponent = createToggledComponent({
       connect,
-      target: isAuthenticatedState,
+      path: isAuthenticatedState,
       components: {
-        Authenticated: AuthenticatedComponent,
-        Anonymous: AnonymousComponent,
+        authenticated: AuthenticatedComponent,
+        anonymous: AnonymousComponent,
       },
     })
 
@@ -54,10 +54,10 @@ describe("createToggledComponent", () => {
 
     const ToggledComponent = createToggledComponent({
       connect,
-      target: isAuthenticatedState,
+      path: isAuthenticatedState,
       components: {
-        Authenticated: AuthenticatedComponent,
-        Anonymous: AnonymousComponent
+        authenticated: AuthenticatedComponent,
+        anonymous: AnonymousComponent
       }
     })
 
@@ -72,10 +72,10 @@ describe("createToggledComponent", () => {
 
     const ToggledComponent = createToggledComponent({
       connect,
-      target: isAuthenticatedState,
+      path: isAuthenticatedState,
       components: {
-        Authenticated: AuthenticatedComponent,
-        Anonymous: AnonymousComponent
+        authenticated: AuthenticatedComponent,
+        anonymous: AnonymousComponent
       }
     })
 

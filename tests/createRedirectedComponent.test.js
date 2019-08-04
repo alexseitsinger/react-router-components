@@ -42,8 +42,8 @@ describe("createRedirectedComponent", () => {
 
     const RedirectedComponent = createRedirectedComponent({
       connect,
-      target: isAuthenticatedState,
-      Component: SettingsPage,
+      path: isAuthenticatedState,
+      component: SettingsPage,
     })
 
     const wrapper = setup(store, settingsPageURL, RedirectedComponent)
@@ -57,8 +57,8 @@ describe("createRedirectedComponent", () => {
 
     const RedirectedComponent = createRedirectedComponent({
       connect,
-      target: isAuthenticatedState,
-      Component: SettingsPage,
+      path: isAuthenticatedState,
+      component: SettingsPage,
       url: "/",
     })
 
@@ -73,8 +73,8 @@ describe("createRedirectedComponent", () => {
 
     const RedirectedComponent = createRedirectedComponent({
       connect,
-      target: isAuthenticatedState,
-      Component: SettingsPage,
+      path: isAuthenticatedState,
+      component: SettingsPage,
       url: "/",
     })
 
