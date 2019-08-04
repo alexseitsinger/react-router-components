@@ -6,9 +6,9 @@ import { getStateValue } from "./utils"
  * Returns a connected component that redirects if the state isnt truthy.
  *
  * @param {object} config
- * @param {object} config.Component
+ * @param {object} config.component
  * The component to render if the state is truthy.
- * @param {string} config.target
+ * @param {string} config.path
  * The path to the reducer state key we want to check for truthiness.
  * @param {function} config.connect
  * The connect function to use for connecting to redux.
@@ -29,9 +29,9 @@ import { getStateValue } from "./utils"
  *
  * const RedirectedSettingsPage = createRedirectedComponent({
  *   connect,
- *   Component: SettingsPage,
- *   state: "core.authentication.isAuthenticated",
- *   redirect: "/",
+ *   component: SettingsPage,
+ *   path: "authentication.isAuthenticated",
+ *   url: "/",
  * })
  *
  * function App(props) {
@@ -49,23 +49,34 @@ import { getStateValue } from "./utils"
  */
 export function createRedirectedComponent({
   connect,
-  target,
-  Component,
+  path,
+  component,
   url = "/",
 }){
-  const bits = target.split(".")
+  // Convert the custom component to capitlaized so we can use it in JSX.
+  const ActualComponent = component
+
+  // Split the state target into parts so we can get its nested value.
+  const bits = path.split(".")
   const key = bits.pop()
 
+  if (!( key )) {
+    throw new Error("There was no key found from the state path provided to createRedirectedComponent.")
+  }
+
+  // Create a component to wrap the real component with.
   function RedirectedComponent(props) {
-    if(key && key in props && props[key] === true){
-      return <Component {...props} />
+    if(key in props && props[key] === true){
+      return <ActualComponent {...props} />
     }
     return <Redirect to={url} />
   }
 
+  // Map the target state to this HOC, so we can use the state.
   const mapState = state => ({
     [key]: getStateValue(state, key, bits),
   })
 
+  // Return the connected HOC.
   return connect(mapState)(RedirectedComponent)
 }

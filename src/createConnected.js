@@ -8,7 +8,7 @@ import { createRedirectedComponent } from "./createRedirectedComponent"
  * @param {object} props
  * @param {function} props.connect
  * The connect method to use
- * @param {string} props.target
+ * @param {string} props.path
  * The target state to connect to.
  *
  * @return {object}
@@ -24,44 +24,43 @@ import { createRedirectedComponent } from "./createRedirectedComponent"
  *
  * const connected = createConnected({
  *   connect,
- *   target: "core.authentication.isAuthenticated",
+ *   path: "authentication.isAuthenticated",
  * })
  *
  * export const config = {
  *   path: "/",
  *   Component: connected.toggled({
- *     Anonymous: LandingPage,
- *     Authenticated: HomePage,
+ *     anonymous: LandingPage,
+ *     authenticated: HomePage,
  *   }),
  *   routes: [
  *     {
  *       path: "about",
  *       Component: connected.redirected({
- *         url: "/",
- *         Component: AboutPage,
+ *         component: AboutPage,
  *       }),
  *     },
  *   ]
  * }
  */
-export function createConnected({ connect, target }) {
+export function createConnected({ connect, path }) {
   return {
-    redirected: ({ url = "/", Component }) => {
+    redirected: ({ url = "/", component }) => {
       return createRedirectedComponent({
         connect,
-        target,
-        Component,
+        path,
+        component,
         url,
       })
     },
-    toggled: ({ Authenticated, Anonymous }) => {
+    toggled: ({ authenticated, anonymous }) => {
       return createToggledComponent({
         connect,
-        target,
+        path,
         components: {
-          Authenticated,
-          Anonymous,
-        }
+          authenticated: authenticated,
+          anonymous: anonymous,
+        },
       })
     },
   }

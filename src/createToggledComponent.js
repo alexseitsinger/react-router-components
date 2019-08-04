@@ -7,11 +7,11 @@ import { getStateValue } from "./utils"
  *
  * @param {object} config
  * @param {object} config.components
- * @param {function} config.components.Authenticated
+ * @param {function} config.components.authenticated
  * The component to render when the state is truthy.
- * @param {function} config.components.Anonymous
+ * @param {function} config.components.anonymous
  * The component to render when the state is not truthy.
- * @param {string} config.target
+ * @param {string} config.path
  * The path to the reducer state key we want to check for truthiness.
  * @param {function} config.connect
  * The connect function to use for connecting to redux.
@@ -30,10 +30,10 @@ import { getStateValue } from "./utils"
  *
  * const ToggledIndex = createToggledComponent({
  *   connect,
- *   state: "core.authentication.isAuthenticated",
+ *   path: "authentication.isAuthenticated",
  *   components: {
- *      Authenticated: HomePage,
- *      Anonymous: LandingPage,
+ *      authenticated: HomePage,
+ *      anonymous: LandingPage,
  *   },
  * })
  *
@@ -51,22 +51,34 @@ import { getStateValue } from "./utils"
  */
 export function createToggledComponent({
   connect,
-  target,
-  components: { Anonymous, Authenticated },
+  path,
+  components: { anonymous, authenticated },
 }){
-  const bits = target.split(".")
+  // Conver the components to capitalized for use in JSX.
+  const AuthenticatedComponent = authenticated
+  const AnonymousComponent = anonymous
+
+  // Split the path into its parts for iteration.
+  const bits = path.split(".")
   const key = bits.pop()
 
-  function ToggledComponent(props) {
-    if(key && key in props && props[key] === true){
-      return <Authenticated {...props} />
-    }
-    return <Anonymous {...props} />
+  if (!( key )) {
+    throw new Error("There was no key found from the state path passed to createToggledComponent.")
   }
 
+  // Create a HOC to wrap the actual components.
+  function ToggledComponent(props) {
+    if(key in props && props[key] === true){
+      return <AuthenticatedComponent {...props} />
+    }
+    return <AnonymousComponent {...props} />
+  }
+
+  // Map the state to this HOC.
   const mapState = state => ({
     [key]: getStateValue(state, key, bits)
   })
 
+  // Return the HOC connected tot redux store.
   return connect(mapState)(ToggledComponent)
 }

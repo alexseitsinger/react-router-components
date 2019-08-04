@@ -1,11 +1,19 @@
 import React from "react"
 import _ from "underscore"
 
+
+
 export function getStateValue(state, key, bits) {
   var obj = state
+
   bits.forEach(bit => {
+    if(!( bit in obj )) {
+      throw new Error(`Failed to get state value for: ${bit}`)
+    }
+
     obj = obj[bit]
   })
+
   return obj[key]
 }
 
