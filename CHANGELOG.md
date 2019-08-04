@@ -1,3 +1,10 @@
+<a name="v4.0.0"></a>
+## [v4.0.0](https://github.com/alexseitsinger/react-router-components/compare/v3.0.3...v4.0.0) (2019-08-04)
+
+### Code Refactoring
+- Changes arg names. ([18abb18](https://github.com/alexseitsinger/react-router-components/commit/18abb1865502999f26004f7a060048108178c8a8))
+
+
 <a name="v3.0.3"></a>
 ## [v3.0.3](https://github.com/alexseitsinger/react-router-components/compare/v3.0.2...v3.0.3) (2019-08-01)
 
