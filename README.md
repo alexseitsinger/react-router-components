@@ -8,7 +8,7 @@ Wrapper for creating components using connect and target state.
 
 -   `props` **[object][1]** 
     -   `props.connect` **[function][2]** The connect method to use
-    -   `props.target` **[string][3]** The target state to connect to.
+    -   `props.path` **[string][3]** The target state to connect to.
 
 ### Examples
 
@@ -22,21 +22,20 @@ import { AboutPage } from "pages/about"
 
 const connected = createConnected({
   connect,
-  target: "core.authentication.isAuthenticated",
+  path: "authentication.isAuthenticated",
 })
 
 export const config = {
   path: "/",
   Component: connected.toggled({
-    Anonymous: LandingPage,
-    Authenticated: HomePage,
+    anonymous: LandingPage,
+    authenticated: HomePage,
   }),
   routes: [
     {
       path: "about",
       Component: connected.redirected({
-        url: "/",
-        Component: AboutPage,
+        component: AboutPage,
       }),
     },
   ]
@@ -104,8 +103,8 @@ Returns a connected component that redirects if the state isnt truthy.
 
 -   `config` **[object][1]** 
     -   `config.connect` **[function][2]** The connect function to use for connecting to redux.
-    -   `config.target` **[string][3]** The path to the reducer state key we want to check for truthiness.
-    -   `config.Component` **[object][1]** The component to render if the state is truthy.
+    -   `config.path` **[string][3]** The path to the reducer state key we want to check for truthiness.
+    -   `config.component` **[object][1]** The component to render if the state is truthy.
     -   `config.url` **[string][3]** The pathname to redirect to if state isn't truthy. (optional, default `"/"`)
 
 ### Examples
@@ -121,9 +120,9 @@ import LandingPage from "pages/landing"
 
 const RedirectedSettingsPage = createRedirectedComponent({
   connect,
-  Component: SettingsPage,
-  state: "core.authentication.isAuthenticated",
-  redirect: "/",
+  component: SettingsPage,
+  path: "authentication.isAuthenticated",
+  url: "/",
 })
 
 function App(props) {
@@ -151,12 +150,12 @@ state.
 
 -   `config` **[object][1]** 
     -   `config.connect` **[function][2]** The connect function to use for connecting to redux.
-    -   `config.target` **[string][3]** The path to the reducer state key we want to check for truthiness.
+    -   `config.path` **[string][3]** The path to the reducer state key we want to check for truthiness.
     -   `config.components` **[object][1]** 
-        -   `config.components.Authenticated` **[function][2]** The component to render when the state is truthy.
-        -   `config.components.Anonymous` **[function][2]** The component to render when the state is not truthy.
-    -   `config.components.Anonymous`  
-    -   `config.components.Authenticated`  
+        -   `config.components.authenticated` **[function][2]** The component to render when the state is truthy.
+        -   `config.components.anonymous` **[function][2]** The component to render when the state is not truthy.
+    -   `config.components.anonymous`  
+    -   `config.components.authenticated`  
 
 ### Examples
 
@@ -171,10 +170,10 @@ import LandingPage from "./pages/landing"
 
 const ToggledIndex = createToggledComponent({
   connect,
-  state: "core.authentication.isAuthenticated",
+  path: "authentication.isAuthenticated",
   components: {
-     Authenticated: HomePage,
-     Anonymous: LandingPage,
+     authenticated: HomePage,
+     anonymous: LandingPage,
   },
 })
 
